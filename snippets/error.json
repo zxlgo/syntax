@@ -1,0 +1,12 @@
+{
+     "Inline error handling": {
+          "prefix": "error",
+          "body": ["error $1: $2;"],
+          "description": "Inline error handling"
+     },
+     "Block error handling": {
+          "prefix": "error",
+          "body": ["error $1 {\n\t$2;\n};"],
+          "description": "Block error handling"
+     }
+}

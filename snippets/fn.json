@@ -1,0 +1,22 @@
+{
+     "Fn": {
+          "prefix": "fn",
+          "body": ["fn $1($2) {\n\t$2;\n}\n"],
+          "description": "Create a simple function"
+     },
+     "Fn with return": {
+          "prefix": "fn",
+          "body": ["fn $1($2) {\n\treturn $3;\n}\n"],
+          "description": "Create a simple function with a return"
+     },
+     "Arrow fn": {
+          "prefix": "fn",
+          "body": ["fn($1) => $2"],
+          "description": "Create a simple function with a return"
+     },
+     "Inline fn": {
+          "prefix": "fn",
+          "body": ["fn($1) {\n\t$2;\n}\n"],
+          "description": "Create a simple function with a return"
+     }
+}

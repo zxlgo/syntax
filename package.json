@@ -2,7 +2,8 @@
   "name": "zx",
   "displayName": "Zx Language",
   "description": "Zx Language Syntax Highlighting",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "icon": "icon.png",
   "engines": {
     "vscode": "^1.99.0"
   },
@@ -25,6 +26,36 @@
           "light": "./icons/zx.svg",
           "dark": "./icons/zx.svg"
         }
+      }
+    ],
+    "snippets": [
+      {
+        "language": "zx",
+        "path": "./snippets/hello.json"
+      },
+      {
+        "language": "zx",
+        "path": "./snippets/error.json"
+      },
+      {
+        "language": "zx",
+        "path": "./snippets/define.json"
+      },
+      {
+        "language": "zx",
+        "path": "./snippets/namespace.json"
+      },
+      {
+        "language": "zx",
+        "path": "./snippets/html.json"
+      },
+      {
+        "language": "zx",
+        "path": "./snippets/fn.json"
+      },
+      {
+        "language": "zx",
+        "path": "./snippets/statements.json"
       }
     ],
     "grammars": [

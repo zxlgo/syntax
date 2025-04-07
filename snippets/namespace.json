@@ -1,0 +1,17 @@
+{
+     "Namespace": {
+          "prefix": "namespace",
+          "body": ["namespace $1;\n"],
+          "description": "Define the namespace"
+     },
+     "Use": {
+          "prefix": "use",
+          "body": ["use $1;\n"],
+          "description": "Use a package"
+     },
+     "Use As": {
+          "prefix": "use",
+          "body": ["use $1 as $2;\n"],
+          "description": "Use a package as"
+     }
+}

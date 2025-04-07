@@ -6,6 +6,7 @@
     { "include": "#use" },
     { "include": "#let" },
     { "include": "#const" },
+    { "include": "#const" },
     { "include": "#define" },
     { "include": "#number" },
     { "include": "#string" },
@@ -14,7 +15,9 @@
     { "include": "#identifier" },
     { "include": "#comments" },
     { "include": "#templateLiteral" },
-    { "include": "#htmlTemplateLiteral" }
+    { "include": "#htmlTemplateLiteral" },
+    { "include": "#nil" },
+    { "include": "#semicolon" }
   ],
   "repository": {
     "namespace": {
@@ -25,18 +28,37 @@
         },
         { "name": "keyword.control.use.zx", "match": "\\b(use)\\b" },
         { "name": "keyword.control.as.zx", "match": "\\b(as)\\b" },
-        { "name": "keyword.control.from.zx", "match": "\\b(from)\\b" }
+        { "name": "keyword.control.from.zx", "match": "\\b(from)\\b" },
+        {
+          "name": "entity.name.namespace.zx",
+          "match": "(?<=\\bnamespace\\s)(\\$?[a-zA-Z_][a-zA-Z0-9_\\$]*)\\b"
+        }
+      ]
+    },
+    "semicolon": {
+      "patterns": [
+        { "name": "punctuation.terminator.semicolon.zx", "match": ";" }
       ]
     },
     "let": {
+      "patterns": [{ "name": "keyword.control.let.zx", "match": "\\b(let)\\b" }]
+    },
+    "const": {
       "patterns": [
-        { "name": "keyword.control.let.zx", "match": "\\b(let)\\b" },
-        { "name": "keyword.control.const.zx", "match": "\\b(const)\\b" }
+        { "name": "keyword.control.const.zx", "match": "\\b(const)\\b" },
+        {
+          "name": "constant.other.zx",
+          "match": "(?<=\\bconst\\s)(\\$?[a-zA-Z_][a-zA-Z0-9_\\$]*)\\b"
+        }
       ]
     },
     "define": {
       "patterns": [
-        { "name": "keyword.control.define.zx", "match": "\\b(define)\\b" }
+        { "name": "keyword.control.define.zx", "match": "\\b(define)\\b" },
+        {
+          "name": "entity.name.class.zx",
+          "match": "(?<=\\bdefine\\s)(\\$?[a-zA-Z_][a-zA-Z0-9_\\$]*)\\b"
+        }
       ]
     },
     "keywords": {
@@ -52,7 +74,9 @@
         { "name": "keyword.control.array.zx", "match": "\\b(array)\\b" },
         { "name": "keyword.control.fn.zx", "match": "\\b(fn)\\b" },
         { "name": "keyword.control.error.zx", "match": "\\b(error)\\b" },
-        { "name": "keyword.control.in.zx", "match": "\\b(in)\\b" }
+        { "name": "keyword.control.in.zx", "match": "\\b(in)\\b" },
+        { "name": "keyword.control.import.zx", "match": "\\b(import)\\b" },
+        { "name": "keyword.control.fail.zx", "match": "\\b(fail)\\b" }
       ]
     },
     "number": {
@@ -84,7 +108,15 @@
       "patterns": [
         {
           "name": "variable.function.zx",
-          "match": "\\b(?!fn\\b)([a-zA-Z_][a-zA-Z0-9_]*)\\("
+          "match": "(?<!\\w)(?!fn\\b|import\\b|fail\\b)(\\$?[a-zA-Z_][a-zA-Z0-9_\\$]*)(?=\\()"
+        }
+      ]
+    },
+    "nil": {
+      "patterns": [
+        {
+          "name": "constant.language.nil.zx",
+          "match": "\\bnil\\b"
         }
       ]
     },
@@ -92,7 +124,7 @@
       "patterns": [
         {
           "name": "variable.other.identifier.zx",
-          "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b"
+          "match": "(?<!\\w)(?!nil\\b)(\\$?[a-zA-Z_][a-zA-Z0-9_\\$]*\\$?)(?!\\w)"
         }
       ]
     },
@@ -117,27 +149,19 @@
           "end": "`",
           "patterns": [
             {
-              "name": "variable.interpolation.zx",
+              "name": "support.other.zx",
               "begin": "\\{\\{",
               "end": "\\}\\}",
               "patterns": [
-                {
-                  "name": "variable.other.zx",
-                  "match": "[a-zA-Z_][a-zA-Z0-9_]*"
-                },
-                {
-                  "name": "constant.numeric.zx",
-                  "match": "\\b[0-9]+(\\.[0-9]+)?\\b"
-                },
-                {
-                  "name": "variable.function.zx",
-                  "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\("
-                }
+                { "include": "#number" },
+                { "include": "#string" },
+                { "include": "#function" },
+                { "include": "#keywords" },
+                { "include": "#identifier" },
+                { "include": "#comments" },
+                { "include": "#nil" },
+                { "include": "#semicolon" }
               ]
-            },
-            {
-              "name": "constant.character.escape.zx",
-              "match": "\\\\."
             }
           ]
         }
@@ -189,18 +213,14 @@
               "begin": "\\{\\{",
               "end": "\\}\\}",
               "patterns": [
-                {
-                  "name": "variable.other.zx",
-                  "match": "[a-zA-Z_][a-zA-Z0-9_]*"
-                },
-                {
-                  "name": "constant.numeric.zx",
-                  "match": "\\b[0-9]+(\\.[0-9]+)?\\b"
-                },
-                {
-                  "name": "variable.function.zx",
-                  "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\("
-                }
+                { "include": "#number" },
+                { "include": "#string" },
+                { "include": "#function" },
+                { "include": "#keywords" },
+                { "include": "#identifier" },
+                { "include": "#comments" },
+                { "include": "#nil" },
+                { "include": "#semicolon" }
               ]
             },
             {

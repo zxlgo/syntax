@@ -1,0 +1,7 @@
+{
+     "Html div": {
+          "prefix": "<div>",
+          "body": ["<>\n\t<div>\n\t\t$1\n\t</div>\n</>;"],
+          "description": "Create a div inside template"
+     }
+}

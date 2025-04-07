@@ -1,0 +1,12 @@
+{
+     "Definition with constructor": {
+          "prefix": "define",
+          "body": ["define $1 {\n\tfn construct($2) {$3}\n}"],
+          "description": "New definition with constructor"
+     },
+     "Definition": {
+          "prefix": "define",
+          "body": ["define $1 {\n\t$2;\n}"],
+          "description": "New definition without constructor"
+     }
+}
