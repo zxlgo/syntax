@@ -1,0 +1,38 @@
+{
+  "name": "zx",
+  "displayName": "Zx Language",
+  "description": "Zx Language Syntax Highlighting",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.99.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "zx",
+        "aliases": [
+          "zxl",
+          "zx"
+        ],
+        "extensions": [
+          ".zx"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/zx.svg",
+          "dark": "./icons/zx.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "zx",
+        "scopeName": "source.zx",
+        "path": "./syntaxes/zx.tmLanguage.json"
+      }
+    ]
+  }
+}

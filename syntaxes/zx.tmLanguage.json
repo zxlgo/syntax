@@ -1,0 +1,217 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "zx",
+  "patterns": [
+    { "include": "#namespace" },
+    { "include": "#use" },
+    { "include": "#let" },
+    { "include": "#const" },
+    { "include": "#define" },
+    { "include": "#number" },
+    { "include": "#string" },
+    { "include": "#function" },
+    { "include": "#keywords" },
+    { "include": "#identifier" },
+    { "include": "#comments" },
+    { "include": "#templateLiteral" },
+    { "include": "#htmlTemplateLiteral" }
+  ],
+  "repository": {
+    "namespace": {
+      "patterns": [
+        {
+          "name": "keyword.control.namespace.zx",
+          "match": "\\b(namespace)\\b"
+        },
+        { "name": "keyword.control.use.zx", "match": "\\b(use)\\b" },
+        { "name": "keyword.control.as.zx", "match": "\\b(as)\\b" },
+        { "name": "keyword.control.from.zx", "match": "\\b(from)\\b" }
+      ]
+    },
+    "let": {
+      "patterns": [
+        { "name": "keyword.control.let.zx", "match": "\\b(let)\\b" },
+        { "name": "keyword.control.const.zx", "match": "\\b(const)\\b" }
+      ]
+    },
+    "define": {
+      "patterns": [
+        { "name": "keyword.control.define.zx", "match": "\\b(define)\\b" }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        { "name": "keyword.control.if.zx", "match": "\\b(if)\\b" },
+        { "name": "keyword.control.else.zx", "match": "\\b(else)\\b" },
+        { "name": "keyword.control.return.zx", "match": "\\b(return)\\b" },
+        { "name": "keyword.control.while.zx", "match": "\\b(while)\\b" },
+        { "name": "keyword.control.throw.zx", "match": "\\b(throw)\\b" },
+        { "name": "keyword.control.for.zx", "match": "\\b(for)\\b" },
+        { "name": "keyword.control.spin.zx", "match": "\\b(spin)\\b" },
+        { "name": "keyword.control.while.zx", "match": "\\b(while)\\b" },
+        { "name": "keyword.control.array.zx", "match": "\\b(array)\\b" },
+        { "name": "keyword.control.fn.zx", "match": "\\b(fn)\\b" },
+        { "name": "keyword.control.error.zx", "match": "\\b(error)\\b" },
+        { "name": "keyword.control.in.zx", "match": "\\b(in)\\b" }
+      ]
+    },
+    "number": {
+      "patterns": [
+        { "name": "constant.numeric.zx", "match": "\\b[0-9]+(\\.[0-9]+)?\\b" }
+      ]
+    },
+    "string": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.zx",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            { "name": "constant.character.escape.zx", "match": "\\\\." }
+          ]
+        },
+        {
+          "name": "string.quoted.single.zx",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            { "name": "constant.character.escape.zx", "match": "\\\\." }
+          ]
+        }
+      ]
+    },
+    "function": {
+      "patterns": [
+        {
+          "name": "variable.function.zx",
+          "match": "\\b(?!fn\\b)([a-zA-Z_][a-zA-Z0-9_]*)\\("
+        }
+      ]
+    },
+    "identifier": {
+      "patterns": [
+        {
+          "name": "variable.other.identifier.zx",
+          "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b"
+        }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.zx",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.zx",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "templateLiteral": {
+      "patterns": [
+        {
+          "name": "string.quoted.template.zx",
+          "begin": "`",
+          "end": "`",
+          "patterns": [
+            {
+              "name": "variable.interpolation.zx",
+              "begin": "\\{\\{",
+              "end": "\\}\\}",
+              "patterns": [
+                {
+                  "name": "variable.other.zx",
+                  "match": "[a-zA-Z_][a-zA-Z0-9_]*"
+                },
+                {
+                  "name": "constant.numeric.zx",
+                  "match": "\\b[0-9]+(\\.[0-9]+)?\\b"
+                },
+                {
+                  "name": "variable.function.zx",
+                  "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\("
+                }
+              ]
+            },
+            {
+              "name": "constant.character.escape.zx",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "htmlTemplateLiteral": {
+      "patterns": [
+        {
+          "name": "text.html.zx",
+          "begin": "<>",
+          "end": "</>",
+          "patterns": [
+            {
+              "name": "meta.tag.zx",
+              "begin": "<([a-zA-Z][a-zA-Z0-9\\-_]*)",
+              "beginCaptures": {
+                "0": { "name": "punctuation.definition.tag.begin.zx" },
+                "1": { "name": "entity.name.tag.zx" }
+              },
+              "end": ">",
+              "endCaptures": {
+                "0": { "name": "punctuation.definition.tag.end.zx" }
+              },
+              "patterns": [
+                {
+                  "match": "\\s+([a-zA-Z][a-zA-Z0-9\\-_]*)\\s*(=)\\s*(\"[^\"]*\"|'[^']*'|[^\\s\"'=<>`]+)?",
+                  "captures": {
+                    "1": { "name": "entity.other.attribute-name.zx" },
+                    "2": { "name": "punctuation.separator.key-value.zx" },
+                    "3": { "name": "string.quoted.zx" }
+                  }
+                }
+              ]
+            },
+            {
+              "name": "meta.tag.zx",
+              "begin": "</([a-zA-Z][a-zA-Z0-9\\-_]*)",
+              "beginCaptures": {
+                "0": { "name": "punctuation.definition.tag.begin.zx" },
+                "1": { "name": "entity.name.tag.zx" }
+              },
+              "end": ">",
+              "endCaptures": {
+                "0": { "name": "punctuation.definition.tag.end.zx" }
+              }
+            },
+            {
+              "name": "variable.interpolation.zx",
+              "begin": "\\{\\{",
+              "end": "\\}\\}",
+              "patterns": [
+                {
+                  "name": "variable.other.zx",
+                  "match": "[a-zA-Z_][a-zA-Z0-9_]*"
+                },
+                {
+                  "name": "constant.numeric.zx",
+                  "match": "\\b[0-9]+(\\.[0-9]+)?\\b"
+                },
+                {
+                  "name": "variable.function.zx",
+                  "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\("
+                }
+              ]
+            },
+            {
+              "name": "comment.block.html.zx",
+              "begin": "<!--",
+              "end": "-->"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "scopeName": "source.zx"
+}
